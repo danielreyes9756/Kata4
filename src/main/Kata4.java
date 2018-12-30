@@ -6,7 +6,6 @@
 package main;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import kata4.model.Histogram;
 import kata4.model.Mail;
@@ -18,17 +17,25 @@ import view.MailListReader;
  * @author danie
  */
 public class Kata4 {
-
-    /**
-     * @param args the command line arguments
-     */
-  
+    private List<Mail> mailList;
+    Histogram<String> histogram;
     public static void main(String[] args) throws IOException {
-        String fileName = "C:\\Users\\danie\\Documents\\NetBeansProjects\\kata4\\src\\email.txt";
-        List<Mail> mailList= MailListReader.read(fileName);
-        Histogram<String> histogram = MailHistogramBuilder.build(mailList);
-        HistogramDisplay histoDisplay= new HistogramDisplay(histogram);
+        new Kata4().execute();
+    }
+    public void execute() throws IOException {
+        input();
+        process();
+        output();
+    }
+    private void input() throws IOException {
+        String filname = "C:\\Users\\danie\\Documents\\NetBeansProjects\\kata4\\src\\email.txt";
+        mailList = MailListReader.read(filname);
+    }
+    private void process() {
+        histogram = MailHistogramBuilder.build(mailList);
+    }
+    private void output() {
+        HistogramDisplay histoDisplay = new HistogramDisplay(histogram);
         histoDisplay.execute();
     }
-}
- 
+} 
